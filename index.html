@@ -476,10 +476,7 @@
         at least one encounter. The guild is not impressed, but they have<br>
         seen worse. Much worse.
       </div>
-      <div class="results-scroll">
-        Your final score
-        <span class="results-score" id="finalScore"></span>
-      </div>
+
       <div class="btn-row" style="justify-content:center">
         <button class="btn" id="restartBtn">Attempt Again</button>
       </div>
@@ -563,7 +560,9 @@ function loadQuestion(idx) {
     [entries[i], entries[j]] = [entries[j], entries[i]];
   }
 
-  entries.forEach(([letter, ans]) => {
+  const labels = ['A', 'B', 'C', 'D'];
+  entries.forEach(([_origLetter, ans], index) => {
+    const letter = labels[index];
     const li = document.createElement('li');
     const btn = document.createElement('button');
     btn.className = 'answer-btn';
@@ -614,8 +613,6 @@ function showResults() {
   questionScreen.style.display = 'none';
   resultsScreen.style.display = 'block';
   document.getElementById('progressFill').style.width = '100%';
-  const pct = Math.round((score / questions.length) * 100);
-  document.getElementById('finalScore').textContent = `${score} / ${questions.length}  (${pct}%)`;
 }
 </script>
 </body>
